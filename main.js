@@ -1,12 +1,12 @@
 (function() {
-  var input, midi, trTable, zmq;
+  var input, midi, sock, trTable, zmq;
 
   module.exports = (function(_this) {
     return function() {};
   })(this);
 
   trTable = {
-    48: [0, "/my/first/url", "first"],
+    48: [0, "/afdb", "afdb"],
     49: [0, "/my/second/url", "second"]
   };
 
@@ -18,6 +18,10 @@
 
   console.log("Using port " + (input.getPortName(0)));
 
+  sock = zmq.socket('push');
+
+  sock.bind('tcp://127.0.0.1:43000');
+
   input.on("message", function(deltaTime, message) {
     var func, missile, note, vel;
     func = message[0], note = message[1], vel = message[2];
@@ -25,7 +29,8 @@
       console.log("note: " + note + " vel: " + vel);
       if (note in trTable) {
         missile = trTable[note];
-        console.log(missile);
+        console.log("Sending (" + missile + ")");
+        sock.send(JSON.stringify(missile));
       }
     }
   });

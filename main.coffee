@@ -13,6 +13,10 @@ input = new midi.input()
 # Get the name of a specified input port.
 console.log "Using port #{input.getPortName 0}"
 
+# Initializing ZMQ connection
+sock = zmq.socket('push')
+sock.bind 'tcp://127.0.0.1:43000'
+
 # Configure a callback.
 input.on "message", (deltaTime, message) ->
   [func, note, vel] = message
@@ -20,7 +24,8 @@ input.on "message", (deltaTime, message) ->
     console.log "note: #{note} vel: #{vel}"
     if note of trTable
       missile = trTable[note]
-      console.log(missile)
+      console.log("Sending (#{missile})")
+      sock.send JSON.stringify missile
   return
 
 
