@@ -1,8 +1,8 @@
 module.exports = () =>
 
 trTable =
-  48: [0, "/my/first/url", "first"]
-  49: [0, "/my/second/url", "second"]
+  48: [0, "/", "first"]
+  47: [0, "/afdb-load", "second"]
 
 midi = require "midi"
 zmq = require "zmq"
