@@ -1,13 +1,23 @@
 module.exports = () =>
 
 trTable =
-  48: [0, "/", "first"]
-  47: [0, "/afdb-load", "second"]
+  48: [0, "/", "tom1"]
+  45: [0, "/afdb-load", "tom2"]
+  43: [0, "/", "floor_tom"]
+  38: [0, "/afdb-load", "main"]
+  46: [0, "/", "hat"]
+  42: [0, "/afdb-load", "hat_closed"]
+  44: [0, "/afdb-load", "hat_pedal"]
+  54: [0, "/", "crash"]
+  55: [0, "/", "crash_edge"]
+  51: [0, "/", "ride"]
+  53: [0, "/", "ride_edge"]
+  36: [0, "/afdb-load", "bass"]
 
 midi = require "midi"
 zmq = require "zmq"
 
-midi_port = 1
+midi_port = 0
 
 input = new midi.input()
 console.log "Using port #{input.getPortName midi_port}"
